@@ -1,3 +1,113 @@
+#!/bin/bash
+        
+echo "Welcome to Marquis... User. Marquis is a tool which is essentially just node.js but easier to inst!"
+
+main() {
+echo "
+
+
+
+        MARQUIS.BETA
+
+
+  
+        ]= DEVELOPED BY NexBoiiiiii =[
+        
+
+ "
+        
+echo "Downloading Marquis..."
+sleep 2
+ 
+curl -L -o marq https://raw.githubusercontent.com/hack-spectacle/Marquis/main/marq
+chmod +x marq
+        
+echo "Marquis downloaded."
+echo "Run it using: ./marq help"#!/bin/bash
+ 
+main() {
+        echo "Welcome to Marquis... User. Marquis is a tool which is essentially just NPM but easier to install!"
+ 
+        echo "
+ 
+        
+ 
+        MARQUIS.BETA
+                
+                
+ 
+        ]= DEVELOPED BY NexBoiiiiii =[
+                
+ 
+ "
+                
+        mkdir -p Shell-Inst-New
+                
+        touch Shell-1
+        mv Shell-1 Shell-Inst-New
+ 
+        read -p "Enter your username: " name
+ 
+        echo "$name" > saved_name.txt
+
+        echo "Thank you for inputting this name: $name"
+
+        touch info
+
+        echo "Marquis install information" > info
+        echo "Username: $name" >> info
+ 
+        say "So $name please see this file: info"
+ 
+        read -p "Ready to download? " answer
+ 
+        if [ "$answer" = "yes" ]; then
+                echo "Downloading Marquis..."
+                sleep 2
+ 
+                curl -L -o marq https://raw.githubusercontent.com/hack-spectacle/Marquis/main/marq
+                chmod +x marq
+ 
+                echo "Marquis downloaded."
+                echo "Run it using: ./marq help"
+        else
+                echo "Cancelled."
+        fi
+}
+ 
+main
+ 
+}
+
+mkdir Shell-Inst-New
+
+touch Shell-1
+mv Shell-1 Shell-Inst-New
+        
+        
+read -p "Enter your username: " name
+        
+echo "$name" > saved_name.txt
+        
+echo "Thank you for inputting this name: $name"
+        
+touch info
+                
+say "So $user please see this file: info"
+                
+read -p "Ready to download?" answer
+ 
+if [ "$answer" = "yes" ]; then
+  echo "Downloading..."
+  pause 2   
+  main
+else
+  echo "Cancelled."
+fi
+
+ 
+
+
 curl -L -o marq https://raw.githubusercontent.com/YOUR-USERNAME/marquis/main/marq
 chmod +x marq
 echo "Welcome user! we have downloaded marquis!"
