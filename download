@@ -1,0 +1,4 @@
+curl -L -o marq https://raw.githubusercontent.com/YOUR-USERNAME/marquis/main/marq
+chmod +x marq
+echo "Welcome user! we have downloaded marquis!"
+./marq help
