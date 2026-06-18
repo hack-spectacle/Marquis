@@ -1,0 +1,161 @@
+#!/bin/bash
+
+command="$1"
+
+show_help() {
+	echo "Available commands:"
+	echo "  cmd help"
+	echo "  cmd download"
+	echo "  cmd remove"
+	echo "  cmd zip"
+	echo "  cmd unzip"
+	echo "  cmd list"
+	echo "  cmd mkdir"
+	echo "  cmd rename"
+	echo "  cmd copy"
+	echo "  cmd move"
+	echo "  cmd read"
+	echo "  cmd clear"
+}
+
+confirm_action() {
+	read -p "Do you confirm this action? Type yes to continue: " confirm
+	if [ "$confirm" = "yes" ]; then
+		return 0
+	else
+		echo "Cancelled."
+		return 1
+	fi
+}
+
+if [ "$command" = "help" ]; then
+	show_help
+
+elif [ "$command" = "download" ]; then
+	echo "Command: Download/new"
+	echo "WARNING: CMD DOES NOT HAVE REWIND PROTOCOL"
+
+	read -p "Url? " url
+	read -p "Save as filename? " filename
+
+	if confirm_action; then
+		curl -L -o "$filename" "$url"
+		echo "Download finished: $filename"
+	fi
+
+elif [ "$command" = "remove" ]; then
+	echo "Command: Remove"
+	echo "WARNING: CMD DOES NOT HAVE REWIND PROTOCOL"
+
+	if confirm_action; then
+		read -p "Is the target a folder or a file? " ans
+		read -p "Enter the name/path: " target
+
+		if [ "$ans" = "file" ]; then
+			rm "$target"
+			echo "File removed: $target"
+
+		elif [ "$ans" = "folder" ]; then
+			rm -r "$target"
+			echo "Folder removed: $target"
+
+		else
+			echo "Invalid choice. Type file or folder."
+		fi
+	fi
+
+elif [ "$command" = "zip" ]; then
+	echo "Command: Zip"
+
+	read -p "Enter file/folder to zip: " target
+	read -p "Enter output zip name, example archive.zip: " zipname
+
+	if confirm_action; then
+		zip -r "$zipname" "$target"
+		echo "Created zip file: $zipname"
+	fi
+
+elif [ "$command" = "unzip" ]; then
+	echo "Command: Unzip"
+
+	read -p "Enter zip file name/path: " zipfile
+	read -p "Enter destination folder: " destination
+
+	if confirm_action; then
+		mkdir -p "$destination"
+		unzip "$zipfile" -d "$destination"
+		echo "Unzipped $zipfile into $destination"
+	fi
+
+elif [ "$command" = "list" ]; then
+	echo "Command: List files"
+
+	read -p "Enter folder path, or press Enter for current folder: " folder
+
+	if [ -z "$folder" ]; then
+		ls -la
+	else
+		ls -la "$folder"
+	fi
+
+elif [ "$command" = "mkdir" ]; then
+	echo "Command: Make folder"
+
+	read -p "Enter new folder name/path: " foldername
+
+	if confirm_action; then
+		mkdir -p "$foldername"
+		echo "Folder created: $foldername"
+	fi
+
+elif [ "$command" = "rename" ]; then
+	echo "Command: Rename"
+
+	read -p "Enter current file/folder name/path: " oldname
+	read -p "Enter new name/path: " newname
+
+	if confirm_action; then
+		mv "$oldname" "$newname"
+		echo "Renamed to: $newname"
+	fi
+
+elif [ "$command" = "copy" ]; then
+	echo "Command: Copy"
+
+	read -p "Enter file/folder to copy: " source
+	read -p "Enter destination: " destination
+
+	if confirm_action; then
+		cp -r "$source" "$destination"
+		echo "Copied to: $destination"
+	fi
+
+elif [ "$command" = "move" ]; then
+	echo "Command: Move"
+
+	read -p "Enter file/folder to move: " source
+	read -p "Enter destination: " destination
+
+	if confirm_action; then
+		mv "$source" "$destination"
+		echo "Moved to: $destination"
+	fi
+
+elif [ "$command" = "read" ]; then
+	echo "Command: Read file"
+
+	read -p "Enter file name/path: " file
+
+	if [ -f "$file" ]; then
+		cat "$file"
+	else
+		echo "File not found."
+	fi
+
+elif [ "$command" = "clear" ]; then
+	clear
+
+else
+	echo "Unknown command."
+	echo "Use: cmd help"
+fi
